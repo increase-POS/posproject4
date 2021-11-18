@@ -80,8 +80,11 @@ namespace SetupPosServer
                 {
                     AvtivateServer ac = new AvtivateServer();
                     Global.APIUri = tb_serverUri.Text + @"/api/";
-                   chk = await ac.checkconn();
-                 
+                  chk = await ac.checkconn();
+                  //string res=  await ac.checkincconn();
+
+
+                    //
                     chk = await ac.Sendserverkey(tb_activationkey.Text);
                     if (chk == -1)
                     {

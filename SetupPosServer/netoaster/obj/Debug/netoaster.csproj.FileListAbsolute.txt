@@ -204,3 +204,18 @@ D:\VSproject\SetupPosServer - from Restaurant\netoaster\obj\Debug\netoaster.cspr
 D:\VSproject\SetupPosServer - from Restaurant\netoaster\obj\Debug\netoaster.csproj.CoreCompileInputs.cache
 D:\VSproject\SetupPosServer - from Restaurant\netoaster\obj\Debug\netoaster.dll
 D:\VSproject\SetupPosServer - from Restaurant\netoaster\obj\Debug\netoaster.pdb
+D:\myproj\posproject4\SetupPosServer\netoaster\bin\Debug\netoaster.dll
+D:\myproj\posproject4\SetupPosServer\netoaster\bin\Debug\netoaster.pdb
+D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.csprojAssemblyReference.cache
+D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\ToasterWindow.g.cs
+D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster_MarkupCompile.cache
+D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster_MarkupCompile.lref
+D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\Themes\Generic.baml
+D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\ToasterWindow.baml
+D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.g.resources
+D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.Properties.Resources.resources
+D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.csproj.GenerateResource.cache
+D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.csproj.CoreCompileInputs.cache
+D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.dll
+D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.pdb

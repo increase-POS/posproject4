@@ -125,51 +125,51 @@ namespace SetupPosServer.Classes
 
 
 
-        public async Task<SendDetail> GetSerialsAndDetails(string packageSaleCode, string customerServerCode)
-        {
-            SendDetail item = new SendDetail();
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("packageSaleCode", packageSaleCode);
-            parameters.Add("customerServerCode", customerServerCode);
+        //public async Task<SendDetail> GetSerialsAndDetails(string packageSaleCode, string customerServerCode)
+        //{
+        //    SendDetail item = new SendDetail();
+        //    Dictionary<string, string> parameters = new Dictionary<string, string>();
+        //    parameters.Add("packageSaleCode", packageSaleCode);
+        //    parameters.Add("customerServerCode", customerServerCode);
 
-            //#################
-            IEnumerable<Claim> claims = await APIResult.getList("packageUser/ActivateServer", parameters);
+        //    //#################
+        //    IEnumerable<Claim> claims = await APIResult.getList("packageUser/ActivateServer", parameters);
 
-            foreach (Claim c in claims)
-            {
-                if (c.Type == "scopes")
-                {
-                    item = JsonConvert.DeserializeObject<SendDetail>(c.Value, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+        //    foreach (Claim c in claims)
+        //    {
+        //        if (c.Type == "scopes")
+        //        {
+        //            item = JsonConvert.DeserializeObject<SendDetail>(c.Value, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
 
-                }
-            }
-            return item;
+        //        }
+        //    }
+        //    return item;
 
-        }
+        //}
 
         // checkincconn
 
-        public async Task<string> checkincconn()
-        {
+        //public async Task<string> checkincconn()
+        //{
           
-            string item = "";
+        //    string item = "";
          
-            //#################
-            IEnumerable<Claim> claims = await APIResult.getList("Activate/checkincconn");
+        //    //#################
+        //    IEnumerable<Claim> claims = await APIResult.getList("Activate/checkincconn");
 
-            foreach (Claim c in claims)
-            {
-                if (c.Type == "scopes")
-                {
-                    item = c.Value;
-                    break;
-                }
-            }
-            return item;
+        //    foreach (Claim c in claims)
+        //    {
+        //        if (c.Type == "scopes")
+        //        {
+        //            item = c.Value;
+        //            break;
+        //        }
+        //    }
+        //    return item;
 
 
 
-        }
+        //}
 
     }
 }

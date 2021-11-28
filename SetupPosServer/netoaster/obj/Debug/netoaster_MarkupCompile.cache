@@ -4,7 +4,7 @@
 library
 C#
 .cs
-D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\
+E:\GitHub\posproject4\SetupPosServer\netoaster\obj\Debug\
 netoaster
 none
 false
@@ -12,9 +12,9 @@ DEBUG;TRACE
 
 2997740530
 
-7-89002111
+8630744548
 141881241103
 Themes\Generic.xaml;ToasterWindow.xaml;
 
-False
+True
 

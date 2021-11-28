@@ -1,4 +1,5 @@
-﻿using SetupPosServer.Classes;
+﻿using netoaster;
+using SetupPosServer.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,40 +81,38 @@ namespace SetupPosServer
                 {
                     AvtivateServer ac = new AvtivateServer();
                     Global.APIUri = tb_serverUri.Text + @"/api/";
-                  chk = await ac.checkconn();
-                  //string res=  await ac.checkincconn();
+                    chk = await ac.checkconn();
+                    //string res=  await ac.checkincconn();
 
 
                     //
                     chk = await ac.Sendserverkey(tb_activationkey.Text);
                     if (chk == -1)
                     {
-                        MessageBox.Show("The Activation site Not found");
+                        Toaster.ShowWarning(Window.GetWindow(this), message: "The Activation site Not found", animation: ToasterAnimation.FadeIn);
                     }
                     else if (chk == 0)
                     {
-                        MessageBox.Show("The Activation not complete");
+                        Toaster.ShowWarning(Window.GetWindow(this), message: "The Activation not complete", animation: ToasterAnimation.FadeIn);
                     }
                     else if (chk == -2)
                     {
-                        MessageBox.Show("The key is used before");
+                        Toaster.ShowWarning(Window.GetWindow(this), message: "The key is used before", animation: ToasterAnimation.FadeIn);
                     }
                     else if (chk == -3)
                     {
-                        MessageBox.Show("The key is Not exist");
+                        Toaster.ShowWarning(Window.GetWindow(this), "The key is Not exist", animation: ToasterAnimation.FadeIn);
                     }
                     else
                     {
-                        MessageBox.Show("The Activation done successfuly ");
+                        Toaster.ShowSuccess(Window.GetWindow(this), message: "The Activation done successfuly", animation: ToasterAnimation.FadeIn);
                     }
-
-
                 }
             }
             catch (Exception ex)
             {
                 Global.APIUri = t;//temp delete
-                MessageBox.Show("The server Not Found");
+                Toaster.ShowWarning(Window.GetWindow(this), message: "The server Not Found", animation: ToasterAnimation.FadeIn);
             }
         }
         private void Btn_cancel_Click(object sender, RoutedEventArgs e)
@@ -133,9 +132,7 @@ namespace SetupPosServer
             {
                 string name = sender.GetType().Name;
                 validateEmpty(name, sender);
-
                 TextBox textBox = sender as TextBox;
-
             }
             catch (Exception ex)
             {

@@ -219,3 +219,17 @@ D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.csproj.Genera
 D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.csproj.CoreCompileInputs.cache
 D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.dll
 D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.pdb
+E:\GitHub\posproject4\SetupPosServer\netoaster\bin\Debug\netoaster.dll
+E:\GitHub\posproject4\SetupPosServer\netoaster\bin\Debug\netoaster.pdb
+E:\GitHub\posproject4\SetupPosServer\netoaster\obj\Debug\ToasterWindow.g.cs
+E:\GitHub\posproject4\SetupPosServer\netoaster\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\GitHub\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster_MarkupCompile.cache
+E:\GitHub\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster_MarkupCompile.lref
+E:\GitHub\posproject4\SetupPosServer\netoaster\obj\Debug\Themes\Generic.baml
+E:\GitHub\posproject4\SetupPosServer\netoaster\obj\Debug\ToasterWindow.baml
+E:\GitHub\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.g.resources
+E:\GitHub\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.Properties.Resources.resources
+E:\GitHub\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.csproj.GenerateResource.cache
+E:\GitHub\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.csproj.CoreCompileInputs.cache
+E:\GitHub\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.dll
+E:\GitHub\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.pdb

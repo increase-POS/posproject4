@@ -210,14 +210,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="netoaster.dll" size="26624">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="netoaster.dll" size="27136">
       <assemblyIdentity name="netoaster" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>5E9LXC/YaCKfV+zmWvWex4Gq/QO6tU12G+aRHmkzls0=</dsig:DigestValue>
+        <dsig:DigestValue>Wh0pSwXR+DeFRSsj0TRYjLrOrFpZDNUboBH2EEkV6TE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -241,7 +241,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>O9NJRpukgf21waBWjCC9s133mcDXDe5UoYB5ydkUx6c=</dsig:DigestValue>
+        <dsig:DigestValue>NJPEsO0pBUbALeLs01q9Jxe62unfGxe4aF+gJu8uLec=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

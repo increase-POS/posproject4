@@ -84,25 +84,26 @@ namespace SetupPosServer
                     chk = await ac.checkconn();
                     //string res=  await ac.checkincconn();
 
-
+                 //   MessageBox.Show(chk.ToString());
                     //
                     chk = await ac.Sendserverkey(tb_activationkey.Text);
-                    if (chk == -1)
+
+
+                 
+                    if (chk <= 0)
                     {
-                        Toaster.ShowWarning(Window.GetWindow(this), message: "The Activation site Not found", animation: ToasterAnimation.FadeIn);
+                         string message = "inc(" + chk + ")";
+                  
+                        string messagecode = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(message));
+                        tb_activationkey.Text = messagecode;
+
+
+                        string msg = "The Activation not complete (Error code:"+ messagecode+")" ;
+
+
+                        Toaster.ShowWarning(Window.GetWindow(this), message: msg, animation: ToasterAnimation.FadeIn);
                     }
-                    else if (chk == 0)
-                    {
-                        Toaster.ShowWarning(Window.GetWindow(this), message: "The Activation not complete", animation: ToasterAnimation.FadeIn);
-                    }
-                    else if (chk == -2)
-                    {
-                        Toaster.ShowWarning(Window.GetWindow(this), message: "The key is used before", animation: ToasterAnimation.FadeIn);
-                    }
-                    else if (chk == -3)
-                    {
-                        Toaster.ShowWarning(Window.GetWindow(this), message: "The key is Not exist", animation: ToasterAnimation.FadeIn);
-                    }
+           
                     else
                     {
                         Toaster.ShowSuccess(Window.GetWindow(this), message: "The Activation done successfuly", animation: ToasterAnimation.FadeIn);

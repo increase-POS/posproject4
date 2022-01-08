@@ -234,14 +234,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Restaurant.exe" size="1858056">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Restaurant.exe" size="1855496">
       <assemblyIdentity name="Restaurant" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>dQFKa2UzTrKlwXsIg0ikbqJwx0jzjSTVewjmIgudrQg=</dsig:DigestValue>
+        <dsig:DigestValue>08yII+fNcKTKtH/i4OhufYGY4gOOxhp9h8fKGNVIAnQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

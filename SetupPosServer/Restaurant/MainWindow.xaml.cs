@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Globalization;
 namespace SetupPosServer
 {
     /// <summary>
@@ -71,39 +71,91 @@ namespace SetupPosServer
                 //SectionData.ExceptionMessage(ex, this);
             }
         }
+
+        //public static DateTime? DateTodbdate(DateTime? date)
+        //{
+        //    string sdate = "";
+        //    DateTime? newdate = null;
+        //   // newdate = DateTime.Parse(sdate);
+        //    if (date != null)
+        //    {
+
+        //    //"yyyy'-'MM'-'dd'T'HH':'mm':'ss"
+        //  //  HH: mm: ss", CultureInfo.InvariantCulture
+        //        sdate = date.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss");
+        //       /// date.Value.Millisecond.ToString();
+        //  //    newdate= DateTime.ParseExact("23/01/2013 00:00:00", "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+        //    }
+        //  //  newdate= DateTime.Parse(sdate);
+        //    newdate = Convert.ToDateTime(sdate);
+        //    return newdate;
+        //}
+        public static string DateTodbstring(DateTime? date)
+        {
+            string sdate = "";
+            DateTime? newdate = null;
+            // newdate = DateTime.Parse(sdate);
+            if (date != null)
+            {
+
+                //"yyyy'-'MM'-'dd'T'HH':'mm':'ss"
+                //  HH: mm: ss", CultureInfo.InvariantCulture
+          // sdate = date.Value.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss.ffffff");
+                sdate =  date.Value.ToLongTimeString(); 
+               
+                /// date.Value.Millisecond.ToString();
+                //    newdate= DateTime.ParseExact("23/01/2013 00:00:00", "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+            }
+            newdate= Convert.ToDateTime(sdate);
+          //  newdate = DateTime.Parse(sdate);
+            return sdate;
+        }
         private async void Btn_next_Click(object sender, RoutedEventArgs e)
         {
+            //string s = "";
+
+            //s = DateTodbdate(DateTime.Now).ToString();
+            ////   tb_serverUri.Text =s + DateTodbdate(DateTime.Now).Value.Millisecond.ToString();
+            //tb_serverUri.Text = s;
+
+
+            ////s = DateTodbstring(DateTime.Now);
+            ////tb_serverUri.Text = s;
+            ////MessageBox.Show(s);
+
+
+
             string t = Global.APIUri;//temp delete
             int chk = 0;
             try
             {
-                if (tb_activationkey.Text != "".Trim() && tb_activationkey.Text != "".Trim())
+                if (tb_activationkey.Text.Trim() != "".Trim() && tb_serverUri.Text.Trim() != "".Trim())
                 {
                     AvtivateServer ac = new AvtivateServer();
                     Global.APIUri = tb_serverUri.Text + @"/api/";
                     chk = await ac.checkconn();
                     //string res=  await ac.checkincconn();
 
-                 //   MessageBox.Show(chk.ToString());
+                    //   MessageBox.Show(chk.ToString());
                     //
-                    chk = await ac.Sendserverkey(tb_activationkey.Text);
+                    chk = await ac.StatSendserverkey(tb_activationkey.Text,"all");
 
+                 //   MessageBox.Show(chk.ToString());
 
-                 
                     if (chk <= 0)
                     {
-                         string message = "inc(" + chk + ")";
-                  
+                        string message = "inc(" + chk + ")";
+
                         string messagecode = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(message));
-                        tb_activationkey.Text = messagecode;
+                      //  tb_activationkey.Text = messagecode;
 
 
-                        string msg = "The Activation not complete (Error code:"+ messagecode+")" ;
+                        string msg = "The Activation not complete (Error code:" + messagecode + ")";
 
 
                         Toaster.ShowWarning(Window.GetWindow(this), message: msg, animation: ToasterAnimation.FadeIn);
                     }
-           
+
                     else
                     {
                         Toaster.ShowSuccess(Window.GetWindow(this), message: "The Activation done successfuly", animation: ToasterAnimation.FadeIn);
@@ -116,6 +168,50 @@ namespace SetupPosServer
                 Toaster.ShowWarning(Window.GetWindow(this), message: "The server Not Found", animation: ToasterAnimation.FadeIn);
             }
         }
+
+        //private async void next_Click(object sender, RoutedEventArgs e)
+        //{
+          
+        //    int chk = 0;
+        //    string activationkey = "";//getget from info 
+        //    try
+        //    {
+        //        if (activationkey.Trim() != "".Trim())
+        //        {
+        //            AvtivateServer ac = new AvtivateServer();
+                  
+        //            chk = await ac.checkconn();
+                  
+        //            chk = await ac.Sendserverkey(tb_activationkey.Text);
+
+
+
+        //            if (chk <= 0)
+        //            {
+        //                string message = "inc(" + chk + ")";
+
+        //                string messagecode = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(message));
+        //                tb_activationkey.Text = messagecode;
+
+
+        //                string msg = "The Activation not complete (Error code:" + messagecode + ")";
+
+
+        //                Toaster.ShowWarning(Window.GetWindow(this), message: msg, animation: ToasterAnimation.FadeIn);
+        //            }
+
+        //            else
+        //            {
+        //                Toaster.ShowSuccess(Window.GetWindow(this), message: "The Activation done successfuly", animation: ToasterAnimation.FadeIn);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+            
+        //        Toaster.ShowWarning(Window.GetWindow(this), message: "The server Not Found", animation: ToasterAnimation.FadeIn);
+        //    }
+        //}
         private void Btn_cancel_Click(object sender, RoutedEventArgs e)
         {
             try

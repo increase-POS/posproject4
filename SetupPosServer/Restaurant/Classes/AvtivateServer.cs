@@ -15,51 +15,51 @@ using Newtonsoft.Json.Converters;
 namespace SetupPosServer.Classes
 {
 
-    public class PosSerialSend
-    {
+    //public class PosSerialSend
+    //{
 
-        public string serial { get; set; }
-        public string posDeviceCode { get; set; }
+    //    public string serial { get; set; }
+    //    public string posDeviceCode { get; set; }
 
-        public bool isBooked { get; set; }
-        public int isActive { get; set; }
-    }
-
-
-    public class packagesSend
-    {
-
-        public string packageName { get; set; }
-
-        public int branchCount { get; set; }
-        public int posCount { get; set; }
-        public int userCount { get; set; }
-        public int vendorCount { get; set; }
-        public int customerCount { get; set; }
-        public int itemCount { get; set; }
-        public int salesInvCount { get; set; }
-
-        public string programName { get; set; }
-
-        public string verName { get; set; }
-
-        public int isActive { get; set; }
-        public string packageSaleCode { get; set; }
-        public string packageCode { get; set; }
-        public int storeCount { get; set; }
-        public Nullable<System.DateTime> endDate { get; set; }
-        public bool islimitDate { get; set; }
-        public Nullable<bool> isOnlineServer { get; set; }
-        public string customerServerCode { get; set; }
+    //    public bool isBooked { get; set; }
+    //    public int isActive { get; set; }
+    //}
 
 
-    }
-    public class SendDetail
-    {
-        public List<PosSerialSend> PosSerialSendList;
+    //public class packagesSend
+    //{
 
-        public packagesSend packageSend;
-    }
+    //    public string packageName { get; set; }
+
+    //    public int branchCount { get; set; }
+    //    public int posCount { get; set; }
+    //    public int userCount { get; set; }
+    //    public int vendorCount { get; set; }
+    //    public int customerCount { get; set; }
+    //    public int itemCount { get; set; }
+    //    public int salesInvCount { get; set; }
+
+    //    public string programName { get; set; }
+
+    //    public string verName { get; set; }
+
+    //    public int isActive { get; set; }
+    //    public string packageSaleCode { get; set; }
+    //    public string packageCode { get; set; }
+    //    public int storeCount { get; set; }
+    //    public Nullable<System.DateTime> endDate { get; set; }
+    //    public bool islimitDate { get; set; }
+    //    public Nullable<bool> isOnlineServer { get; set; }
+    //    public string customerServerCode { get; set; }
+
+
+    //}
+    //public class SendDetail
+    //{
+    //    public List<PosSerialSend> PosSerialSendList;
+
+    //    public packagesSend packageSend;
+    //}
     public class AvtivateServer
     {
       
@@ -124,6 +124,31 @@ namespace SetupPosServer.Classes
 
 
 
+        public async Task<int> StatSendserverkey(string skey,string activeState)
+        {
+            int item = 0;
+            // int res = 0;
+            //  SendDetail item = new SendDetail();
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("skey", skey);
+            parameters.Add("activeState", activeState);
+            //#################
+            IEnumerable<Claim> claims = await APIResult.getList("Activate/StatSendserverkey", parameters);
+
+            foreach (Claim c in claims)
+            {
+                if (c.Type == "scopes")
+                {
+                    item = int.Parse(c.Value);
+                    // item = JsonConvert.DeserializeObject<SendDetail>(c.Value, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+
+                    break;
+                }
+            }
+            return item;
+
+        }
+
         //public async Task<SendDetail> GetSerialsAndDetails(string packageSaleCode, string customerServerCode)
         //{
         //    SendDetail item = new SendDetail();
@@ -150,9 +175,9 @@ namespace SetupPosServer.Classes
 
         //public async Task<string> checkincconn()
         //{
-          
+
         //    string item = "";
-         
+
         //    //#################
         //    IEnumerable<Claim> claims = await APIResult.getList("Activate/checkincconn");
 

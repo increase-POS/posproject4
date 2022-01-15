@@ -32,13 +32,27 @@ namespace SetupPosServer
             try
             {
 
-
+                fillServerState(cb_serverStatus);
+                cb_serverStatus.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
                 SectionData.ExceptionMessage(ex, this);
             }
         }
+
+        static public void fillServerState(ComboBox combo)
+        {
+            var typelist = new[] {
+                new { Text = "Online"    , Value = "True" },
+                new { Text = "trOffline"   , Value = "False" }
+                 };
+            combo.DisplayMemberPath = "Text";
+            combo.SelectedValuePath = "Value";
+            combo.ItemsSource = typelist;
+
+        }
+
         private void HandleKeyPress(object sender, KeyEventArgs e)
         {
             try
@@ -129,6 +143,9 @@ namespace SetupPosServer
             int chk = 0;
             try
             {
+                validateEmptyTextBox(tb_serverUri, p_errorServerUri, tt_errorServerUri, "trEmptyError");
+                validateEmptyTextBox(tb_activationkey, p_errorActivationkey, tt_errorActivationkey, "trEmptyError");
+
                 if (tb_activationkey.Text.Trim() != "".Trim() && tb_serverUri.Text.Trim() != "".Trim())
                 {
                     AvtivateServer ac = new AvtivateServer();
@@ -247,10 +264,8 @@ namespace SetupPosServer
             }
             else if (name == "ComboBox")
             {
-                //if ((sender as ComboBox).Name == "cb_paymentProcessType")
-                //    SectionData.validateEmptyComboBox((ComboBox)sender, p_errorpaymentProcessType, tt_errorpaymentProcessType, "trErrorEmptyPaymentTypeToolTip");
-                //else if ((sender as ComboBox).Name == "cb_card")
-                //    SectionData.validateEmptyComboBox((ComboBox)sender, p_errorCard, tt_errorCard, "trEmptyCardTooltip");
+                if ((sender as ComboBox).Name == "cb_serverStatus")
+                    SectionData.validateEmptyComboBox((ComboBox)sender, p_errorServerStatus, tt_errorServerStatus, "trEmptyError");
             }
         }
         public static BrushConverter bc = new BrushConverter();
@@ -286,5 +301,45 @@ namespace SetupPosServer
             }
         }
 
+        private void Cb_serverStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if(cb_serverStatus.SelectedIndex == 0)
+                {
+                    txt_activationkeyTitle.Visibility = Visibility.Visible;
+                    tb_activationkey.Visibility = Visibility.Visible;
+                    btn_upload.Visibility = Visibility.Collapsed;
+                    btn_next.IsEnabled = true;
+
+                }
+                else
+                {
+                    txt_activationkeyTitle.Visibility = Visibility.Collapsed;
+                    tb_activationkey.Visibility = Visibility.Collapsed;
+                    btn_upload.Visibility = Visibility.Visible;
+                    btn_next.IsEnabled = false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                SectionData.ExceptionMessage(ex, this);
+            }
+
+           
+        }
+
+        private void Btn_upload_Click(object sender, RoutedEventArgs e)
+        {//upload
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                Toaster.ShowWarning(Window.GetWindow(this), message: "The server Not Found", animation: ToasterAnimation.FadeIn);
+            }
+        }
     }
 }

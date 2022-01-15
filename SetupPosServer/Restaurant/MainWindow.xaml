@@ -38,6 +38,9 @@
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -48,6 +51,7 @@
                     <TextBlock Text="Server Config" x:Name="txt_title" Foreground="#178DD2" 
          Grid.ColumnSpan="2" FontWeight="Bold" FontSize="18"    VerticalAlignment="Center" 
                         HorizontalAlignment="Left" Margin="10,10,10,5" />
+                    
                     <Border  Grid.Row="1" Grid.ColumnSpan="3"  Margin="5 0 5 5"      Height="2" 
                  BorderThickness="0" Background="{StaticResource MainColorlightGrey}" />
                     <!--#region  Server Uri-->
@@ -76,15 +80,42 @@
                         </Path.ToolTip>
                     </Path>
                     <!--#endregion-->
+                    
+                    <!--#region  online/offline-->
+                    <TextBlock x:Name="txt_serverStatus" Text="Server Status" FontSize="14"  
+                   HorizontalAlignment="Left" Margin="5"
+                           Foreground="{StaticResource MainColorGrey}" 
+                      Grid.Row="3" Grid.Column="0"
+                       VerticalAlignment="Center"  />
+                    <ComboBox x:Name="cb_serverStatus" Text="" Padding="10,0,5,0"
+                          Grid.Row="3" Grid.Column="1"      
+                     BorderThickness="0,0,0,2" materialDesign:HintAssist.Hint="Server Status..."
+                                      Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                     Foreground="{StaticResource MainColorGrey}"  TextBlock.FontSize="12" Background="#f8f8f8" 
+                                     BorderBrush="AliceBlue" 
+                                     materialDesign:TextFieldAssist.CharacterCounterStyle="{Binding}"
+                                     Height="40" Margin="5" 
+                                     LostFocus="Tb_validateEmptyLostFocus" 
+                                     SelectionChanged="Cb_serverStatus_SelectionChanged">
+                    </ComboBox>
+                    <Path Fill="#E81123" Stretch="Fill" Margin="0,15,15,15" x:Name="p_errorServerStatus"
+                                  HorizontalAlignment="Right" Grid.Column="1"   Grid.Row="3"  Visibility="Collapsed" 
+                                  VerticalAlignment="Center" Width="15"  Height="15"
+                                  Data="M12,2 C6.48,2 2,6.48 2,12 C2,17.52 6.48,22 12,22 C17.52,22 22,17.52 22,12 C22,6.48 17.52,2 12,2 Z M12,13 C11.45,13 11,12.55 11,12 L11,8 C11,7.45 11.45,7 12,7 C12.55,7 13,7.45 13,8 L13,12 C13,12.55 12.55,13 12,13 Z M13,17 L11,17 L11,15 L13,15 L13,17 Z">
+                        <Path.ToolTip>
+                            <ToolTip  x:Name="tt_errorServerStatus"  Style="{StaticResource ToolTipError}"/>
+                        </Path.ToolTip>
+                    </Path>
+                    <!--#endregion-->
 
                     <!--#region  Activation key-->
                     <TextBlock x:Name="txt_activationkeyTitle" Text="Activation key:" FontSize="14"  
                    HorizontalAlignment="Left" Margin="5"
                            Foreground="{StaticResource MainColorGrey}" 
-                      Grid.Row="3" Grid.Column="0"
+                      Grid.Row="4" Grid.Column="0"
                        VerticalAlignment="Center"  />
                     <TextBox x:Name="tb_activationkey" Text="" Padding="10,0,5,0"
-                          Grid.Row="3" Grid.Column="1"      
+                          Grid.Row="4" Grid.Column="1"      
                      BorderThickness="0,0,0,2" materialDesign:HintAssist.Hint="Activation key"
                                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      Foreground="{StaticResource MainColorGrey}"  TextBlock.FontSize="12" Background="#f8f8f8" 
@@ -95,13 +126,18 @@
                                      LostFocus="Tb_validateEmptyLostFocus">
                     </TextBox>
                     <Path Fill="#E81123" Stretch="Fill" Margin="0,15,15,15" x:Name="p_errorActivationkey"
-                                  HorizontalAlignment="Right" Grid.Column="1"   Grid.Row="3"  Visibility="Collapsed" 
+                                  HorizontalAlignment="Right" Grid.Column="1"   Grid.Row="4"  Visibility="Collapsed" 
                                   VerticalAlignment="Center" Width="15"  Height="15"
                                   Data="M12,2 C6.48,2 2,6.48 2,12 C2,17.52 6.48,22 12,22 C17.52,22 22,17.52 22,12 C22,6.48 17.52,2 12,2 Z M12,13 C11.45,13 11,12.55 11,12 L11,8 C11,7.45 11.45,7 12,7 C12.55,7 13,7.45 13,8 L13,12 C13,12.55 12.55,13 12,13 Z M13,17 L11,17 L11,15 L13,15 L13,17 Z">
                         <Path.ToolTip>
                             <ToolTip  x:Name="tt_errorActivationkey"  Style="{StaticResource ToolTipError}"/>
                         </Path.ToolTip>
                     </Path>
+                    <!--#endregion-->
+                    <!--#region  upload-->
+                    <Button x:Name="btn_upload" Tag="upload" Grid.Row="5"  Grid.Column="2"
+                  BorderBrush="{x:Null}" 
+                        Margin="1 5 0 1"    Content="Upload file" Click="Btn_upload_Click"/>
                     <!--#endregion-->
 
                 </Grid>
@@ -116,7 +152,7 @@
 
                 <Button x:Name="btn_next" Tag="next" Grid.Row="2"  Grid.Column="2"
                   BorderBrush="{x:Null}" Click="Btn_next_Click"
-                        Margin="1 5 0 1"    Content="Done"/>
+                        Margin="1 5 0 1"    Content="Save"/>
             </Grid>
 
 

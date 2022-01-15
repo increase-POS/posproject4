@@ -8,14 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("pic/increase-login-bg-rtl.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("pic/increase-login-bg.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("pic/increase-logo.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("pic/increaselogo.ico")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("pic/no-image-icon-125x125.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("pic/no-image-icon-40x40.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("pic/no-image-icon-512x512.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("pic/no-image-icon-90x90.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("pic/server-setup-bg.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("thumb/tmp0.txt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("thumb/tmp1.txt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("thumb/tmp2.txt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("thumb/tmp3.txt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("thumb/tmp4.txt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("thumb/tmp5.txt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("thumb/tmp6.txt")]
 
 

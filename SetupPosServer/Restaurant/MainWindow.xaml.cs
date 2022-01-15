@@ -15,6 +15,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
+using Microsoft.Win32;
+using Newtonsoft.Json;
+
 namespace SetupPosServer
 {
     /// <summary>
@@ -22,6 +25,9 @@ namespace SetupPosServer
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        OpenFileDialog openFileDialog = new OpenFileDialog();
+        SaveFileDialog saveFileDialog = new SaveFileDialog();
         public MainWindow()
         {
             InitializeComponent();
@@ -45,7 +51,7 @@ namespace SetupPosServer
         {
             var typelist = new[] {
                 new { Text = "Online"    , Value = "True" },
-                new { Text = "trOffline"   , Value = "False" }
+                new { Text = "Offline"   , Value = "False" }
                  };
             combo.DisplayMemberPath = "Text";
             combo.SelectedValuePath = "Value";
@@ -114,38 +120,22 @@ namespace SetupPosServer
 
                 //"yyyy'-'MM'-'dd'T'HH':'mm':'ss"
                 //  HH: mm: ss", CultureInfo.InvariantCulture
-          // sdate = date.Value.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss.ffffff");
-                sdate =  date.Value.ToLongTimeString(); 
-               
+                // sdate = date.Value.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss.ffffff");
+                sdate = date.Value.ToLongTimeString();
+
                 /// date.Value.Millisecond.ToString();
                 //    newdate= DateTime.ParseExact("23/01/2013 00:00:00", "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
             }
-            newdate= Convert.ToDateTime(sdate);
-          //  newdate = DateTime.Parse(sdate);
+            newdate = Convert.ToDateTime(sdate);
+            //  newdate = DateTime.Parse(sdate);
             return sdate;
         }
         private async void Btn_next_Click(object sender, RoutedEventArgs e)
         {
-            //string s = "";
-
-            //s = DateTodbdate(DateTime.Now).ToString();
-            ////   tb_serverUri.Text =s + DateTodbdate(DateTime.Now).Value.Millisecond.ToString();
-            //tb_serverUri.Text = s;
-
-
-            ////s = DateTodbstring(DateTime.Now);
-            ////tb_serverUri.Text = s;
-            ////MessageBox.Show(s);
-
-
-
             string t = Global.APIUri;//temp delete
             int chk = 0;
             try
             {
-                validateEmptyTextBox(tb_serverUri, p_errorServerUri, tt_errorServerUri, "trEmptyError");
-                validateEmptyTextBox(tb_activationkey, p_errorActivationkey, tt_errorActivationkey, "trEmptyError");
-
                 if (tb_activationkey.Text.Trim() != "".Trim() && tb_serverUri.Text.Trim() != "".Trim())
                 {
                     AvtivateServer ac = new AvtivateServer();
@@ -155,16 +145,16 @@ namespace SetupPosServer
 
                     //   MessageBox.Show(chk.ToString());
                     //
-                    chk = await ac.StatSendserverkey(tb_activationkey.Text,"all");
+                    chk = await ac.StatSendserverkey(tb_activationkey.Text, "all");
 
-                 //   MessageBox.Show(chk.ToString());
+                    //   MessageBox.Show(chk.ToString());
 
                     if (chk <= 0)
                     {
                         string message = "inc(" + chk + ")";
 
                         string messagecode = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(message));
-                      //  tb_activationkey.Text = messagecode;
+                        //  tb_activationkey.Text = messagecode;
 
 
                         string msg = "The Activation not complete (Error code:" + messagecode + ")";
@@ -188,7 +178,7 @@ namespace SetupPosServer
 
         //private async void next_Click(object sender, RoutedEventArgs e)
         //{
-          
+
         //    int chk = 0;
         //    string activationkey = "";//getget from info 
         //    try
@@ -196,9 +186,9 @@ namespace SetupPosServer
         //        if (activationkey.Trim() != "".Trim())
         //        {
         //            AvtivateServer ac = new AvtivateServer();
-                  
+
         //            chk = await ac.checkconn();
-                  
+
         //            chk = await ac.Sendserverkey(tb_activationkey.Text);
 
 
@@ -225,7 +215,7 @@ namespace SetupPosServer
         //    }
         //    catch (Exception ex)
         //    {
-            
+
         //        Toaster.ShowWarning(Window.GetWindow(this), message: "The server Not Found", animation: ToasterAnimation.FadeIn);
         //    }
         //}
@@ -305,7 +295,7 @@ namespace SetupPosServer
         {
             try
             {
-                if(cb_serverStatus.SelectedIndex == 0)
+                if (cb_serverStatus.SelectedIndex == 0)
                 {
                     txt_activationkeyTitle.Visibility = Visibility.Visible;
                     tb_activationkey.Visibility = Visibility.Visible;
@@ -315,6 +305,7 @@ namespace SetupPosServer
                 }
                 else
                 {
+                    SectionData.clearValidate(tb_activationkey, p_errorActivationkey);
                     txt_activationkeyTitle.Visibility = Visibility.Collapsed;
                     tb_activationkey.Visibility = Visibility.Collapsed;
                     btn_upload.Visibility = Visibility.Visible;
@@ -327,14 +318,135 @@ namespace SetupPosServer
                 SectionData.ExceptionMessage(ex, this);
             }
 
-           
+
         }
 
-        private void Btn_upload_Click(object sender, RoutedEventArgs e)
+        private async void Btn_upload_Click(object sender, RoutedEventArgs e)
         {//upload
             try
             {
-                this.Close();
+
+                validateEmptyTextBox(tb_serverUri, p_errorServerUri, tt_errorServerUri, "trEmptyError");
+                if (!tb_serverUri.Text.Equals(""))
+                {
+                    // start activate
+                    string t = Global.APIUri;//temp delete
+                    int chk = 0;
+                    string message = "";
+                    try
+                    {
+                        if (tb_serverUri.Text.Trim() != "".Trim())
+                        {
+                            bool isServerActivated = true;
+                            AvtivateServer ac = new AvtivateServer();
+                            Global.APIUri = tb_serverUri.Text + @"/api/";
+
+
+                            string filepath = "";
+                            openFileDialog.Filter = "INC|*.ac; ";
+                            SendDetail customerdata = new SendDetail();
+                            SendDetail dc = new SendDetail();
+                            if (openFileDialog.ShowDialog() == true)
+                            {
+                                filepath = openFileDialog.FileName;
+
+                                //   bool resr = ReportCls.decodefile(filepath, @"D:\stringlist.txt");//comment
+
+                                string objectstr = "";
+
+                                objectstr = ReportCls.decodetoString(filepath);
+
+                                dc = JsonConvert.DeserializeObject<SendDetail>(objectstr, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                                packagesSend pss = new packagesSend();
+
+                                pss = dc.packageSend;
+                                isServerActivated = dc.packageSend.isServerActivated;
+                                pss.activeApp = "all";//no comment
+
+                                dc.packageSend = pss;
+
+                                // string activeState = "";
+                                customerdata = await ac.OfflineActivate(dc, "up");
+
+
+                            }
+
+                            // upload
+
+
+                            if (customerdata.packageSend.result > 0)
+                            {
+                                if (isServerActivated == false || (isServerActivated == true && dc.packageSend.activeState == "up"))
+                                {
+                                    // if first activate OR upgrade  show save dialoge to save customer data in file 
+                                    saveFileDialog.Filter = "File|*.ac;";
+                                    if (saveFileDialog.ShowDialog() == true)
+                                    {
+                                        string DestPath = saveFileDialog.FileName;
+
+                                        string myContent = JsonConvert.SerializeObject(customerdata);
+
+                                        bool res = false;
+
+                                        res = ReportCls.encodestring(myContent, DestPath);
+
+                                        if (res)
+                                        {
+                                            //     //done
+                                            //   MessageBox.Show("Success");
+                                            Toaster.ShowSuccess(Window.GetWindow(this), message: "Success", animation: ToasterAnimation.FadeIn);
+                                        }
+                                        else
+                                        {
+                                            Toaster.ShowWarning(Window.GetWindow(this), message: "Error", animation: ToasterAnimation.FadeIn);
+                                            //   MessageBox.Show("Error");
+                                        }
+
+                                  
+
+                                    
+
+
+                                    }
+                                }
+                                else
+                                {
+                                    // if extend show extend result
+                                    //renew no save
+
+                                    Toaster.ShowSuccess(Window.GetWindow(this), message: "Success Extend", animation: ToasterAnimation.FadeIn);
+
+
+
+                                }
+
+
+
+
+                            }
+                            else
+                            {
+                              MessageBox.Show(customerdata.packageSend.result.ToString());
+                              //  Toaster.ShowWarning(Window.GetWindow(this), message: "Error-" + customerdata.packageSend.result.ToString(), animation: ToasterAnimation.FadeIn);
+
+                            }
+                            //end uploaa 
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Global.APIUri = t;//temp delete
+                        Toaster.ShowWarning(Window.GetWindow(this), message: "The server Not Found", animation: ToasterAnimation.FadeIn);
+                    }
+
+
+                    //end activate
+
+
+                    this.Close();
+                }
+
+
             }
             catch (Exception ex)
             {

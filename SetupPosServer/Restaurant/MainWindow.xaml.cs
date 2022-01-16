@@ -325,7 +325,6 @@ namespace SetupPosServer
         {//upload
             try
             {
-
                 validateEmptyTextBox(tb_serverUri, p_errorServerUri, tt_errorServerUri, "trEmptyError");
                 if (!tb_serverUri.Text.Equals(""))
                 {
@@ -340,7 +339,6 @@ namespace SetupPosServer
                             bool isServerActivated = true;
                             AvtivateServer ac = new AvtivateServer();
                             Global.APIUri = tb_serverUri.Text + @"/api/";
-
 
                             string filepath = "";
                             openFileDialog.Filter = "INC|*.ac; ";
@@ -368,11 +366,8 @@ namespace SetupPosServer
                                 // string activeState = "";
                                 customerdata = await ac.OfflineActivate(dc, "up");
 
-
                             }
-
                             // upload
-
 
                             if (customerdata.packageSend.result > 0)
                             {
@@ -402,11 +397,6 @@ namespace SetupPosServer
                                             //   MessageBox.Show("Error");
                                         }
 
-                                  
-
-                                    
-
-
                                     }
                                 }
                                 else
@@ -416,18 +406,13 @@ namespace SetupPosServer
 
                                     Toaster.ShowSuccess(Window.GetWindow(this), message: "Success Extend", animation: ToasterAnimation.FadeIn);
 
-
-
                                 }
-
-
-
 
                             }
                             else
                             {
-                              MessageBox.Show(customerdata.packageSend.result.ToString());
-                              //  Toaster.ShowWarning(Window.GetWindow(this), message: "Error-" + customerdata.packageSend.result.ToString(), animation: ToasterAnimation.FadeIn);
+                              //MessageBox.Show(customerdata.packageSend.result.ToString());
+                                Toaster.ShowWarning(Window.GetWindow(this), message: "Error-" + customerdata.packageSend.result.ToString(), animation: ToasterAnimation.FadeIn);
 
                             }
                             //end uploaa 
@@ -442,7 +427,7 @@ namespace SetupPosServer
 
                     //end activate
 
-
+                    await Task.Delay(2000);
                     this.Close();
                 }
 

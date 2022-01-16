@@ -98,7 +98,7 @@ namespace SetupPosServer.Classes
         public string notes { get; set; }
         public string upnum { get; set; }
         public string activeApp { get; set; }
-
+        public string confirmStat { get; set; }
     }
     public class SendDetail
     {

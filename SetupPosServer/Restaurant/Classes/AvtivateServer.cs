@@ -169,7 +169,31 @@ namespace SetupPosServer.Classes
 
         }
 
-
+        public static bool validateUrl(string url)
+        {
+            url += "/api/pos/checkUri";
+            bool valid = (Uri.TryCreate(url, UriKind.Absolute, out Uri uriResult) && uriResult.Scheme == Uri.UriSchemeHttp);
+            if (valid)
+            {
+                try
+                {
+                    //Creating the HttpWebRequest
+                    HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+                    //Setting the Request method HEAD, you can also use GET too.
+                    request.Method = "GET";
+                    //Getting the Web Response.
+                    HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+                    //Returns TRUE if the Status code == 200
+                    response.Close();
+                    return (response.StatusCode == HttpStatusCode.OK);
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            return valid;
+        }
 
         public async Task<int> StatSendserverkey(string skey,string activeState)
         {

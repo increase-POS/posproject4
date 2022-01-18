@@ -323,6 +323,9 @@ namespace SetupPosServer
 
         private async void Btn_upload_Click(object sender, RoutedEventArgs e)
         {//upload
+        bool ress=    AvtivateServer.validateUrl(tb_serverUri.Text);
+            MessageBox.Show(ress.ToString());
+            //int chk = await ac.checkconn();
             try
             {
                 validateEmptyTextBox(tb_serverUri, p_errorServerUri, tt_errorServerUri, "trEmptyError");
@@ -330,7 +333,8 @@ namespace SetupPosServer
                 {
                     // start activate
                     string t = Global.APIUri;//temp delete
-                    int chk = 0;
+                  
+                   
                     string message = "";
                     try
                     {

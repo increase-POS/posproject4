@@ -322,125 +322,135 @@ namespace SetupPosServer
         }
 
         private async void Btn_upload_Click(object sender, RoutedEventArgs e)
-        {//upload
+        {
+            //upload
         bool ress=    AvtivateServer.validateUrl(tb_serverUri.Text);
-            MessageBox.Show(ress.ToString());
-            //int chk = await ac.checkconn();
-            try
+            if (ress)
             {
-                validateEmptyTextBox(tb_serverUri, p_errorServerUri, tt_errorServerUri, "trEmptyError");
-                if (!tb_serverUri.Text.Equals(""))
+                
+                //int chk = await ac.checkconn();
+                try
                 {
-                    // start activate
-                    string t = Global.APIUri;//temp delete
-                  
-                   
-                    string message = "";
-                    try
+                    validateEmptyTextBox(tb_serverUri, p_errorServerUri, tt_errorServerUri, "trEmptyError");
+                    if (!tb_serverUri.Text.Equals(""))
                     {
-                        if (tb_serverUri.Text.Trim() != "".Trim())
+                        // start activate
+                        string t = Global.APIUri;//temp delete
+
+
+                        string message = "";
+                        try
                         {
-                            bool isServerActivated = true;
-                            AvtivateServer ac = new AvtivateServer();
-                            Global.APIUri = tb_serverUri.Text + @"/api/";
-
-                            string filepath = "";
-                            openFileDialog.Filter = "INC|*.ac; ";
-                            SendDetail customerdata = new SendDetail();
-                            SendDetail dc = new SendDetail();
-                            if (openFileDialog.ShowDialog() == true)
+                            if (tb_serverUri.Text.Trim() != "".Trim())
                             {
-                                filepath = openFileDialog.FileName;
+                                bool isServerActivated = true;
+                                AvtivateServer ac = new AvtivateServer();
+                                Global.APIUri = tb_serverUri.Text + @"/api/";
 
-                                //   bool resr = ReportCls.decodefile(filepath, @"D:\stringlist.txt");//comment
-
-                                string objectstr = "";
-
-                                objectstr = ReportCls.decodetoString(filepath);
-
-                                dc = JsonConvert.DeserializeObject<SendDetail>(objectstr, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
-                                packagesSend pss = new packagesSend();
-
-                                pss = dc.packageSend;
-                                isServerActivated = dc.packageSend.isServerActivated;
-                                pss.activeApp = "all";//no comment
-
-                                dc.packageSend = pss;
-
-                                // string activeState = "";
-                                customerdata = await ac.OfflineActivate(dc, "up");
-
-                            }
-                            // upload
-
-                            if (customerdata.packageSend.result > 0)
-                            {
-                                if (isServerActivated == false || (isServerActivated == true && dc.packageSend.activeState == "up"))
+                                string filepath = "";
+                                openFileDialog.Filter = "INC|*.ac; ";
+                                SendDetail customerdata = new SendDetail();
+                                SendDetail dc = new SendDetail();
+                                if (openFileDialog.ShowDialog() == true)
                                 {
-                                    // if first activate OR upgrade  show save dialoge to save customer data in file 
-                                    saveFileDialog.Filter = "File|*.ac;";
-                                    if (saveFileDialog.ShowDialog() == true)
+                                    filepath = openFileDialog.FileName;
+
+                                    //   bool resr = ReportCls.decodefile(filepath, @"D:\stringlist.txt");//comment
+
+                                    string objectstr = "";
+
+                                    objectstr = ReportCls.decodetoString(filepath);
+
+                                    dc = JsonConvert.DeserializeObject<SendDetail>(objectstr, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                                    packagesSend pss = new packagesSend();
+
+                                    pss = dc.packageSend;
+                                    isServerActivated = dc.packageSend.isServerActivated;
+                                    pss.activeApp = "all";//no comment
+
+                                    dc.packageSend = pss;
+
+                                    // string activeState = "";
+                                    customerdata = await ac.OfflineActivate(dc, "up");
+
+                                }
+                                // upload
+
+                                if (customerdata.packageSend.result > 0)
+                                {
+                                    if (isServerActivated == false || (isServerActivated == true && dc.packageSend.activeState == "up"))
                                     {
-                                        string DestPath = saveFileDialog.FileName;
-
-                                        string myContent = JsonConvert.SerializeObject(customerdata);
-
-                                        bool res = false;
-
-                                        res = ReportCls.encodestring(myContent, DestPath);
-
-                                        if (res)
+                                        // if first activate OR upgrade  show save dialoge to save customer data in file 
+                                        saveFileDialog.Filter = "File|*.ac;";
+                                        if (saveFileDialog.ShowDialog() == true)
                                         {
-                                            //     //done
-                                            //   MessageBox.Show("Success");
-                                            Toaster.ShowSuccess(Window.GetWindow(this), message: "Success", animation: ToasterAnimation.FadeIn);
+                                            string DestPath = saveFileDialog.FileName;
+
+                                            string myContent = JsonConvert.SerializeObject(customerdata);
+
+                                            bool res = false;
+
+                                            res = ReportCls.encodestring(myContent, DestPath);
+
+                                            if (res)
+                                            {
+                                                //     //done
+                                                //   MessageBox.Show("Success");
+                                                Toaster.ShowSuccess(Window.GetWindow(this), message: "Success", animation: ToasterAnimation.FadeIn);
+                                            }
+                                            else
+                                            {
+                                                Toaster.ShowWarning(Window.GetWindow(this), message: "Error", animation: ToasterAnimation.FadeIn);
+                                                //   MessageBox.Show("Error");
+                                            }
+
                                         }
-                                        else
-                                        {
-                                            Toaster.ShowWarning(Window.GetWindow(this), message: "Error", animation: ToasterAnimation.FadeIn);
-                                            //   MessageBox.Show("Error");
-                                        }
+                                    }
+                                    else
+                                    {
+                                        // if extend show extend result
+                                        //renew no save
+
+                                        Toaster.ShowSuccess(Window.GetWindow(this), message: "Success Extend", animation: ToasterAnimation.FadeIn);
 
                                     }
+
                                 }
                                 else
                                 {
-                                    // if extend show extend result
-                                    //renew no save
-
-                                    Toaster.ShowSuccess(Window.GetWindow(this), message: "Success Extend", animation: ToasterAnimation.FadeIn);
+                                    //MessageBox.Show(customerdata.packageSend.result.ToString());
+                                    Toaster.ShowWarning(Window.GetWindow(this), message: "Error-" + customerdata.packageSend.result.ToString(), animation: ToasterAnimation.FadeIn);
 
                                 }
-
+                                //end uploaa 
                             }
-                            else
-                            {
-                              //MessageBox.Show(customerdata.packageSend.result.ToString());
-                                Toaster.ShowWarning(Window.GetWindow(this), message: "Error-" + customerdata.packageSend.result.ToString(), animation: ToasterAnimation.FadeIn);
-
-                            }
-                            //end uploaa 
                         }
+                        catch (Exception ex)
+                        {
+                            Global.APIUri = t;//temp delete
+                            Toaster.ShowWarning(Window.GetWindow(this), message: "The server Not Found", animation: ToasterAnimation.FadeIn);
+                        }
+
+
+                        //end activate
+
+                        await Task.Delay(2000);
+                        this.Close();
                     }
-                    catch (Exception ex)
-                    {
-                        Global.APIUri = t;//temp delete
-                        Toaster.ShowWarning(Window.GetWindow(this), message: "The server Not Found", animation: ToasterAnimation.FadeIn);
-                    }
 
 
-                    //end activate
-
-                    await Task.Delay(2000);
-                    this.Close();
                 }
-
-
+                catch (Exception ex)
+                {
+                    Toaster.ShowWarning(Window.GetWindow(this), message: "The server Not Found", animation: ToasterAnimation.FadeIn);
+                }
             }
-            catch (Exception ex)
+            else
             {
                 Toaster.ShowWarning(Window.GetWindow(this), message: "The server Not Found", animation: ToasterAnimation.FadeIn);
+
             }
+
         }
     }
 }

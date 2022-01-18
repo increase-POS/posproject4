@@ -206,7 +206,6 @@ D:\VSproject\SetupPosServer - from Restaurant\netoaster\obj\Debug\netoaster.dll
 D:\VSproject\SetupPosServer - from Restaurant\netoaster\obj\Debug\netoaster.pdb
 D:\myproj\posproject4\SetupPosServer\netoaster\bin\Debug\netoaster.dll
 D:\myproj\posproject4\SetupPosServer\netoaster\bin\Debug\netoaster.pdb
-D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster.csprojAssemblyReference.cache
 D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\ToasterWindow.g.cs
 D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\myproj\posproject4\SetupPosServer\netoaster\obj\Debug\netoaster_MarkupCompile.cache

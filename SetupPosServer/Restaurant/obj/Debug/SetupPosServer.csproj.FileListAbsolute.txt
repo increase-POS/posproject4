@@ -350,3 +350,5 @@ D:\myproj\posproject4\SetupPosServer\Restaurant\obj\Debug\Activation.exe.manifes
 D:\myproj\posproject4\SetupPosServer\Restaurant\obj\Debug\Activation.application
 D:\myproj\posproject4\SetupPosServer\Restaurant\obj\Debug\Activation.exe
 D:\myproj\posproject4\SetupPosServer\Restaurant\obj\Debug\Activation.pdb
+D:\myproj\posproject4\SetupPosServer\Restaurant\bin\Debug\pic\Activate-icon.ico
+D:\myproj\posproject4\SetupPosServer\Restaurant\obj\Debug\Activation_Content.g.cs
